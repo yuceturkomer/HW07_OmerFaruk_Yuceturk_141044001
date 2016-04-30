@@ -6,12 +6,17 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 /**
- * Created by ömer on 27.04.2016.
+ * The generic PriorityQueue Class. The instance E must have been implemented the interface "Comparable"
+ * and comparator is optional.
  */
 public class PriorityQueue<E extends Comparable<E>> extends AbstractQueue<E> {
     private ArrayList<E> customerArrayList;
     Comparator<E> comparator = null;
 
+    /**
+     * If there is a comparator, uses it to sort.
+     * else sorts the customerArrayList using insertion sort.
+     */
     public void sortArray(){
         if(comparator!=null){
             customerArrayList.sort(comparator);
@@ -27,29 +32,54 @@ public class PriorityQueue<E extends Comparable<E>> extends AbstractQueue<E> {
         }
     }
 
+    /**
+     * The no parameter constructor
+     */
     public PriorityQueue() {
         customerArrayList = new ArrayList<E>();
     }
 
+    /**
+     * The constructor if comparator wants to be given
+     * @param comparator comparator object
+     */
     public PriorityQueue(Comparator<E> comparator) {
         this.comparator = comparator;
     }
 
+    /**
+     * Overriden iterator method. Delegates ArrayList's iterator.
+     * @return customerArrayList's iterator
+     */
     @Override
     public Iterator<E> iterator() {
         return customerArrayList.iterator();
     }
 
+    /**
+     * Delegates ArrayList's size method
+     * @return customerArrayList's size
+     */
     @Override
     public int size() {
         return customerArrayList.size();
     }
+
+    /**
+     * Adds the value at the end of the array and then sorts it. It provides us to use the array as priority queue
+     * @param e item to be added
+     * @return true
+     */
     public boolean offer(E e) {
         customerArrayList.add(e);
         sortArray();
         return true;
     }
 
+    /**
+     * Removes the last element(which has the most priority)
+     * @return removed element's reference
+     */
     public E poll() {
         if (customerArrayList.size() == 0) {
             return null;
@@ -57,6 +87,10 @@ public class PriorityQueue<E extends Comparable<E>> extends AbstractQueue<E> {
         return customerArrayList.remove(customerArrayList.size() - 1);
     }
 
+    /**
+     * Returns the last element's reference without removing it (which has the most priority)
+     * @return Last element's reference
+     */
     public E peek() {
         if (customerArrayList.size() == 0) {
             return null;
@@ -64,6 +98,11 @@ public class PriorityQueue<E extends Comparable<E>> extends AbstractQueue<E> {
         return customerArrayList.get(size() - 1);
     }
 
+    /**
+     * Swaps the values of elements according to given indexes
+     * @param firstIndex
+     * @param secondIndex
+     */
     public void swap(int firstIndex, int secondIndex) {
         if (firstIndex<0||firstIndex>=customerArrayList.size() || secondIndex<0||secondIndex>=customerArrayList.size())
             throw new ArrayIndexOutOfBoundsException();

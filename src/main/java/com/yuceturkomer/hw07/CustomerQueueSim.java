@@ -12,18 +12,25 @@ public class CustomerQueueSim {
     private LinkedList<Customer> customerLinkedList;
 
     /**
-     *
-     * 
+     * The no parameter constructor
      */
     public CustomerQueueSim() {
         customerLinkedList = new LinkedList<Customer>();
     }
 
+    /**
+     * Used for testing
+     */
     public void printLinkedList() {
         for (Customer c : customerLinkedList)
             System.out.println(c);
     }
 
+    /**
+     * Reads data from file, parses it and puts in the Customer list
+     * @param inputFile name as string for input file
+     * @return returns false if file is empty or error occured.
+     */
     public boolean readDataFromFile(String inputFile) {
         FileInputStream fStream = null;
         try {
@@ -59,19 +66,28 @@ public class CustomerQueueSim {
 
     }
 
-    private void swap(int firstIndex, int secondIndex) {
-        if (firstIndex < 0 || firstIndex >= customerLinkedList.size() || secondIndex < 0 || secondIndex >= customerLinkedList.size())
-            throw new ArrayIndexOutOfBoundsException();
-
-        Customer temp = customerLinkedList.get(firstIndex);
-        customerLinkedList.set(firstIndex, customerLinkedList.get(secondIndex));
-        customerLinkedList.set(secondIndex, temp);
-    }
-
+    /**
+     * Calls runSim(int) method.
+     */
     public void runSim() {
         runSim(-1);
     }
 
+    /**
+     * Simulates the Customer queue and gives an output to the console or the file according to the rangeAsHour param.
+     *
+     * Creates a new priority queue. Holds an initial time, and current time as well as inital and current customers
+     * If customerLinkedList is empty then immediately returns.
+     *
+     * Continues until both priorityQueue and customerLinkedList are empty.
+     *
+     * @param rangeAsHours If its a non-negative number, it takes inputs from input file
+     *                     redirects the output to a file named "part1data2.txt" within the interval of initial and given
+     *                     hour.
+     *
+     *                     If its a negative number, then  it takes inputs from input file
+     *                     redirects the output to the standart output.
+     */
     public void runSim(int rangeAsHours) {
         if (customerLinkedList.isEmpty())
             return;
@@ -154,9 +170,7 @@ public class CustomerQueueSim {
                         }
                     }
                 }
-
                 flag = 0;
-
             }
         }
         try {
@@ -168,10 +182,21 @@ public class CustomerQueueSim {
         }
     }
 
+    /**
+     * Takes hour and minute values, converts it to the minute form integer and returns it
+     * @param hour Hour input
+     * @param minute Minute input
+     * @return minute form of given h:m
+     */
     public int minForm(int hour, int minute) {
         return hour * 60 + minute;
     }
 
+    /**
+     * Takes the h:m as minute value and converts it to String form and returns it
+     * @param minform Minute form of given h:m
+     * @return "Hour : Minute" string format of given minute value
+     */
     public String hourMinStr(int minform) {
         return String.format("%02d : %02d", minform / 60, minform % 60);
     }
