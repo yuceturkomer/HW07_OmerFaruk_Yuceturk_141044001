@@ -1,7 +1,12 @@
 package com.yuceturkomer.hw07;
 
 /**
- * Created by ömer on 27.04.2016.
+ * The Customer Class which contains a customer's arrival hour and minute, service time and his type
+ *
+ * Customer 1 = GOLD_CUSTOMER
+ * Customer 2 = SILVER_CUSTOMER
+ * Customer 3 = BRONZE_CUSTOMER
+ *
  */
 public class Customer implements Comparable<Customer> {
     private int hour;
@@ -12,7 +17,13 @@ public class Customer implements Comparable<Customer> {
     private final int SILVER_CUSTOMER = 2;
     private final int BRONZE_CUSTOMER = 3;
 
-
+    /**
+     * There is only 1 constructor and that takes 4 paramters
+     * @param hour Arrival hour
+     * @param minute Arrival minute
+     * @param serviceTime Service time
+     * @param customerType Customer type
+     */
     public Customer(int hour, int minute, int serviceTime, int customerType) {
         this.hour = hour;
         this.minute = minute;
@@ -20,44 +31,54 @@ public class Customer implements Comparable<Customer> {
         this.customerType = customerType;
     }
 
+    /**
+     * Returns hour
+     * @return hour
+     */
     public int getHour() {
         return hour;
     }
 
-    public void setHour(int hour) {
-        this.hour = hour;
-    }
-
+    /**
+     * Returns minute
+     * @return minute
+     */
     public int getMinute() {
         return minute;
     }
 
-    public void setMinute(int minute) {
-        this.minute = minute;
-    }
-
+    /**
+     * Returns serviceTime
+     * @return serviceTime
+     */
     public int getServiceTime() {
         return serviceTime;
     }
 
-    public void setServiceTime(int serviceTime) {
-        this.serviceTime = serviceTime;
-    }
 
+    /**
+     * Returns customerType
+     * @return customerType
+     */
     public int getCustomerType() {
         return customerType;
     }
 
-    public void setCustomerType(int customerType) {
-        this.customerType = customerType;
-    }
-
+    /**
+     * Overriden formatted toString method
+     * @return String form of Customer's details
+     */
     @Override
     public String toString() {
         //I thought it'd be better to use String.format(...) method to return string ordered style.
         return String.format("Arrival time:  %02d:%02d \tService Time: %-8s Customer Type %-1s", hour, minute, serviceTime, customerType);
     }
 
+    /**
+     * Overriden equals method
+     * @param o Object to be compared if equal
+     * @return true if equal. Else false.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -72,6 +93,10 @@ public class Customer implements Comparable<Customer> {
 
     }
 
+    /**
+     * Overriden hashCode method
+     * @return hashCode
+     */
     @Override
     public int hashCode() {
         int result = getHour();
@@ -81,6 +106,12 @@ public class Customer implements Comparable<Customer> {
         return result;
     }
 
+    /**
+     * Compares two Customers firstly according to their type, if they are equal it looks at the hour, if these are
+     * equal too, then it looks at the minute
+     * @param obj
+     * @return
+     */
     public int compareTo(Customer obj) {
         if (obj == null)
             throw new NullPointerException();

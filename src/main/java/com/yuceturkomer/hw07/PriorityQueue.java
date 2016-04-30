@@ -99,9 +99,9 @@ public class PriorityQueue<E extends Comparable<E>> extends AbstractQueue<E> {
     }
 
     /**
-     * Swaps the values of elements according to given indexes
-     * @param firstIndex
-     * @param secondIndex
+     * Swaps the values of elements according to given indices
+     * @param firstIndex index of first element to be swapped
+     * @param secondIndex index of second element to be swapped
      */
     public void swap(int firstIndex, int secondIndex) {
         if (firstIndex<0||firstIndex>=customerArrayList.size() || secondIndex<0||secondIndex>=customerArrayList.size())
